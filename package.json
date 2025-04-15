@@ -1,20 +1,36 @@
 {
-  "name": "automation",
+  "name": "automation_js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Automation framework for API and UI testing",
+  "main": "app.js",
   "type": "commonjs",
+  "author": "Alex Sokolov",
+  "license": "ISC",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests --recursive --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json",
+    "test:api": "mocha tests/api --recursive",
+    "test:ui": "npx playwright test",
+    "report:merge": "mochawesome-merge reports/*.json > reports/merged-report.json",
+    "report:generate": "marge reports/merged-report.json -f report -o reports/html",
+    "test:allure": "npx playwright test --reporter=line,allure-playwright"
+  },
   "dependencies": {
-    "allure-playwright": "^3.2.1",
     "axios": "^1.8.4",
     "dotenv": "^16.5.0",
-    "jest": "^29.7.0",
     "playwright": "^1.51.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.7",
+    "mocha-allure-reporter": "^1.4.0",
+    "mocha-multi-reporters": "^1.1.7",
+    "mochawesome": "^6.1.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0",
+    "chai-colors": "^1.0.1",
+    "allure-playwright": "^3.2.1"
   }
 }

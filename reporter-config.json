@@ -1,0 +1,11 @@
+{
+    "reporterEnabled": "mochawesome, mocha-allure-reporter",
+    "mochawesomeReporterOptions": {
+      "reportDir": "reports",
+      "reportFilename": "result",
+      "quiet": true,
+      "json": true,
+      "html": false
+    }
+  }
+  
