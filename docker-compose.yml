@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+    networks:
+      - testnet
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://juice-shop:3000"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 5s
+
+  api-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tests
+    depends_on:
+      - juice-shop
+    networks:
+      - testnet
+    environment:
+      - BASE_URL_API_DEV=http://juice-shop:3000
+    command: ["sh", "-c", "npx wait-on http://juice-shop:3000 && npm run test:all"]
+    restart: "no"
+    volumes:
+      - ./screenshots:/usr/src/app/screenshots
+
+networks:
+  testnet:
+    driver: bridge

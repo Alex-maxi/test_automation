@@ -10,9 +10,12 @@
     "test": "tests"
   },
   "scripts": {
+    "postinstall": "npx playwright install --with-deps",
     "test": "mocha tests --recursive --reporter mocha-multi-reporters --reporter-options configFile=reporter-config.json",
     "test:api": "mocha tests/api --recursive",
+    "test:all": "npm run test:api && npm run test:ui",
     "test:ui": "npx playwright test",
+    "test:uiui": "npx playwright test --ui",
     "report:merge": "mochawesome-merge reports/*.json > reports/merged-report.json",
     "report:generate": "marge reports/merged-report.json -f report -o reports/html",
     "test:allure": "npx playwright test --reporter=line,allure-playwright"
@@ -23,14 +26,15 @@
     "playwright": "^1.51.1"
   },
   "devDependencies": {
-    "mocha": "^10.2.0",
+    "allure-playwright": "^3.2.1",
     "chai": "^4.3.7",
+    "chai-colors": "^1.0.1",
+    "marge": "^1.0.1",
+    "mocha": "^10.2.0",
     "mocha-allure-reporter": "^1.4.0",
     "mocha-multi-reporters": "^1.1.7",
-    "mochawesome": "^6.1.1",
-    "mochawesome-merge": "^4.2.0",
-    "mochawesome-report-generator": "^5.1.0",
-    "chai-colors": "^1.0.1",
-    "allure-playwright": "^3.2.1"
+    "mochawesome": "^6.3.1",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^5.1.0"
   }
 }

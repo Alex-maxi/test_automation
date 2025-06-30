@@ -1,3 +1,9 @@
 node_modules/
+screenshots/
+reports/
+test-results/
 .env
 *.log
+.DS_Store
+dev.json
+prod.json
