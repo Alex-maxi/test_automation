@@ -1,9 +1,11 @@
 node_modules/
 screenshots/
 reports/
+playwright-report/
 test-results/
 .env
 *.log
 .DS_Store
 dev.json
 prod.json
+eslint.config.mjs

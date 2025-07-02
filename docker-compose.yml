@@ -9,6 +9,7 @@ services:
     networks:
       - testnet
     restart: "no"
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://juice-shop:3000"]
       interval: 5s
@@ -16,7 +17,7 @@ services:
       retries: 15
       start_period: 5s
 
-  api-tests:
+  tests:
     build:
       context: .
       dockerfile: Dockerfile
@@ -31,6 +32,8 @@ services:
     restart: "no"
     volumes:
       - ./screenshots:/usr/src/app/screenshots
+      - ./reports:/usr/src/app/reports
+      - ./playwright-report:/usr/src/app/playwright-report
 
 networks:
   testnet:

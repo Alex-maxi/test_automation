@@ -13,3 +13,5 @@ RUN npm install
 COPY . .
 
 RUN npx playwright install --with-deps
+
+CMD ["wait-for-it", "juice-shop:3000", "--", "npm", "run", "test:all"]
